@@ -1,4 +1,5 @@
 // This code describes a testbench for testing and simulating the full adder circuit model
+`timescale 1ns/1ps
 module tb_full_adder;
 reg x, y, z;
 wire s, c;

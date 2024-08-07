@@ -1,4 +1,5 @@
 // This code describes a testbench for testing and simulating the ripple carry 4-bit adder circuit model
+`timescale 1ns/1ps
 module tb_ripple_carry_adder;
 reg[3:0] i1, i2;
 reg cin;
