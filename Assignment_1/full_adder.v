@@ -1,12 +1,11 @@
-// This code describes a dataflow model of a full adder logic circuit
-module full_adder(x, y, z, s, c);
-input x, y, z;
-output s, c;
-wire s1, c1, c2;
+module full_adder(a, b, cin, s, cout);
 
-assign s1 = x ^ y;
-assign c1 = x & y;
-assign s = s1 ^ z;
-assign c2 = s1 & z;
-assign c = c1 | c2;
+input a, b, cin;
+wire c0, s0, c1;
+output cout,s;
+
+half_adder ha1(a, b, s0, c0);
+half_adder ha2(s0, cin, s, c1);
+or(cout, c0, c1);
+
 endmodule
