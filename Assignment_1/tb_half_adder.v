@@ -6,6 +6,8 @@ wire s, c;
 half_adder h1(a, b, s, c);
 initial 
 begin
+  $dumpfile("test_half_adder.vcd");
+  $dumpvars(1, tb_half_adder);
   a = 1'b0;
   b = 1'b1;
   # 20

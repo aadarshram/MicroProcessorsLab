@@ -1,58 +1,60 @@
 #! /usr/bin/vvp
 :ivl_version "11.0 (stable)";
 :ivl_delay_selection "TYPICAL";
-:vpi_time_precision + 0;
+:vpi_time_precision - 12;
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
-S_0x560ffa8d70a0 .scope module, "tb_half_adder" "tb_half_adder" 2 2;
- .timescale 0 0;
-v0x560ffa8e9cb0_0 .var "a", 0 0;
-v0x560ffa8e9d70_0 .var "b", 0 0;
-v0x560ffa8e9e40_0 .net "c", 0 0, L_0x560ffa8ea170;  1 drivers
-v0x560ffa8e9f40_0 .net "s", 0 0, L_0x560ffa8ea010;  1 drivers
-S_0x560ffa8d7230 .scope module, "h1" "half_adder" 2 5, 3 2 0, S_0x560ffa8d70a0;
+S_0x562e2402f0a0 .scope module, "tb_half_adder" "tb_half_adder" 2 3;
+ .timescale -9 -12;
+v0x562e24042770_0 .var "a", 0 0;
+v0x562e24042830_0 .var "b", 0 0;
+v0x562e24042900_0 .net "c", 0 0, L_0x562e24042c30;  1 drivers
+v0x562e24042a00_0 .net "s", 0 0, L_0x562e24042ad0;  1 drivers
+S_0x562e2402f230 .scope module, "h1" "half_adder" 2 6, 3 2 0, S_0x562e2402f0a0;
  .timescale 0 0;
     .port_info 0 /INPUT 1 "a";
     .port_info 1 /INPUT 1 "b";
     .port_info 2 /OUTPUT 1 "s";
     .port_info 3 /OUTPUT 1 "c";
-L_0x560ffa8ea010 .functor XOR 1, v0x560ffa8e9cb0_0, v0x560ffa8e9d70_0, C4<0>, C4<0>;
-L_0x560ffa8ea170 .functor AND 1, v0x560ffa8e9cb0_0, v0x560ffa8e9d70_0, C4<1>, C4<1>;
-v0x560ffa89dcf0_0 .net "a", 0 0, v0x560ffa8e9cb0_0;  1 drivers
-v0x560ffa8e9a10_0 .net "b", 0 0, v0x560ffa8e9d70_0;  1 drivers
-v0x560ffa8e9ad0_0 .net "c", 0 0, L_0x560ffa8ea170;  alias, 1 drivers
-v0x560ffa8e9b70_0 .net "s", 0 0, L_0x560ffa8ea010;  alias, 1 drivers
-    .scope S_0x560ffa8d70a0;
+L_0x562e24042ad0 .functor XOR 1, v0x562e24042770_0, v0x562e24042830_0, C4<0>, C4<0>;
+L_0x562e24042c30 .functor AND 1, v0x562e24042770_0, v0x562e24042830_0, C4<1>, C4<1>;
+v0x562e23ff5cf0_0 .net "a", 0 0, v0x562e24042770_0;  1 drivers
+v0x562e240424d0_0 .net "b", 0 0, v0x562e24042830_0;  1 drivers
+v0x562e24042590_0 .net "c", 0 0, L_0x562e24042c30;  alias, 1 drivers
+v0x562e24042630_0 .net "s", 0 0, L_0x562e24042ad0;  alias, 1 drivers
+    .scope S_0x562e2402f0a0;
 T_0 ;
+    %vpi_call 2 9 "$dumpfile", "test_half_adder.vcd" {0 0 0};
+    %vpi_call 2 10 "$dumpvars", 32'sb00000000000000000000000000000001, S_0x562e2402f0a0 {0 0 0};
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x560ffa8e9cb0_0, 0, 1;
+    %store/vec4 v0x562e24042770_0, 0, 1;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x560ffa8e9d70_0, 0, 1;
-    %delay 20, 0;
+    %store/vec4 v0x562e24042830_0, 0, 1;
+    %delay 20000, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x560ffa8e9cb0_0, 0, 1;
+    %store/vec4 v0x562e24042770_0, 0, 1;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x560ffa8e9d70_0, 0, 1;
-    %delay 20, 0;
+    %store/vec4 v0x562e24042830_0, 0, 1;
+    %delay 20000, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x560ffa8e9cb0_0, 0, 1;
+    %store/vec4 v0x562e24042770_0, 0, 1;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x560ffa8e9d70_0, 0, 1;
-    %delay 20, 0;
+    %store/vec4 v0x562e24042830_0, 0, 1;
+    %delay 20000, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x560ffa8e9cb0_0, 0, 1;
+    %store/vec4 v0x562e24042770_0, 0, 1;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x560ffa8e9d70_0, 0, 1;
-    %delay 30, 0;
-    %vpi_call 2 19 "$finish" {0 0 0};
+    %store/vec4 v0x562e24042830_0, 0, 1;
+    %delay 30000, 0;
+    %vpi_call 2 22 "$finish" {0 0 0};
     %end;
     .thread T_0;
-    .scope S_0x560ffa8d70a0;
+    .scope S_0x562e2402f0a0;
 T_1 ;
-    %vpi_call 2 21 "$monitor", $time, " a = %b, b = %b, c = %b, s = %b ", v0x560ffa8e9cb0_0, v0x560ffa8e9d70_0, v0x560ffa8e9e40_0, v0x560ffa8e9f40_0 {0 0 0};
+    %vpi_call 2 24 "$monitor", $time, " a = %b, b = %b, c = %b, s = %b ", v0x562e24042770_0, v0x562e24042830_0, v0x562e24042900_0, v0x562e24042a00_0 {0 0 0};
     %end;
     .thread T_1;
 # The file index is used to find the file name in the following table.
@@ -60,4 +62,4 @@ T_1 ;
     "N/A";
     "<interactive>";
     "tb_half_adder.v";
-    "half_adder.v";
+    "half_adder_dataflow.v";

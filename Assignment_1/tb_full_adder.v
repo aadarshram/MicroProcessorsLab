@@ -1,45 +1,47 @@
-// This code describes a testbench for testing and simulating the full adder circuit model
+// This coutode descoutribes a testbencouth for testing and simulating the full adder coutircoutuit model
 `timescale 1ns/1ps
 module tb_full_adder;
-reg x, y, z;
-wire s, c;
-full_adder f1(x, y, z, s, c);
+reg a, b, cin;
+wire s, cout;
+full_adder f1(a, b, cin, s, cout);
 
 initial 
 begin
-    x = 1'b0;
-    y = 1'b0;
-    z = 1'b0;
+    $dumpfile("test_full_adder.vcd");
+    $dumpvars(1, tb_full_adder);
+    a = 1'b0;
+    b = 1'b0;
+    cin = 1'b0;
     #20
-    x = 1'b0;
-    y = 1'b0;
-    z = 1'b1;
+    a = 1'b0;
+    b = 1'b0;
+    cin = 1'b1;
     #20
-    x = 1'b0;
-    y = 1'b1;
-    z = 1'b0;
+    a = 1'b0;
+    b = 1'b1;
+    cin = 1'b0;
     #20
-    x = 1'b0;
-    y = 1'b1;
-    z = 1'b1;
+    a = 1'b0;
+    b = 1'b1;
+    cin = 1'b1;
     #20
-    x = 1'b1;
-    y = 1'b0;
-    z = 1'b0;
+    a = 1'b1;
+    b = 1'b0;
+    cin = 1'b0;
     #20
-    x = 1'b1;
-    y = 1'b0;
-    z = 1'b1;
+    a = 1'b1;
+    b = 1'b0;
+    cin = 1'b1;
     #20
-    x = 1'b1;
-    y = 1'b1;
-    z = 1'b0;
+    a = 1'b1;
+    b = 1'b1;
+    cin = 1'b0;
     #20
-    x = 1'b1;
-    y = 1'b1;
-    z = 1'b1;
+    a = 1'b1;
+    b = 1'b1;
+    cin = 1'b1;
     # 30 $finish;
 end
-initial $monitor($time, " x = %b, y = %b, z = %b, c = %b, s = %b ", x, y, z, c, s);
+initial $monitor($time, " a = %b, b = %b, cin = %b, cout = %b, s = %b ", a, b, cin, cout, s);
 endmodule
     
