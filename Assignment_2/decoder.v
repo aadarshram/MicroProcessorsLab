@@ -8,10 +8,16 @@ always@(cntr) // Whenever counter value changes -> get value for display
 begin
     case(cntr)
     3'd0: val = 7'b0111111;
-    3'd4: val = 7'b1111111;
-    3'd6: val = 7'b0001111;
+    3'd1: val = 7'b0000011;
+    3'd2: val = 7'b1011011;
+    3'd3: val = 7'b1001111;
+    3'd4: val = 7'b1100110;
+    3'd5: val = 7'b1111101;
+    3'd6: val = 7'b1111101;
     3'd7: val = 7'b0000111;
-    3'd3: val = 7'b0000011;
-    3'd1: val = 7'b0111111;
-    
+	3'd8: val = 7'b1111111;
+    3'd9: val = 7'b1101111;
+    endcase
+end
+endmodule
 
