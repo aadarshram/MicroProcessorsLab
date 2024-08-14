@@ -4,23 +4,24 @@ input inClk;
 input reset;
 output outClk;
 reg outClk;
-reg[25:0] clockCount;
+reg clockCount;
 
 always@(negedge reset or posedge inClk)
 begin
     if (reset == 1'b0)
         begin
             outClk = 1'b0;
-            clockCount = 26'd0;
+            clockCount = 1'd0;
         end
     else
         begin
-        clockCount <= clockCount + 1;
-        if (clockCount >= 26'd25000000)
+        if (clockCount >= 1'd1)
             begin
-                clockCount <= 26'd0;
+                clockCount = 1'd0;
                 outClk = ~ outClk;
             end
+        clockCount <= clockCount + 1;
+
         end
 end
 endmodule

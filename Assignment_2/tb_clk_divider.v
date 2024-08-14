@@ -7,16 +7,16 @@ clk_divider cd(inClk, reset, outClk);
 initial
     begin
     inClk = 1'b0;
-    forever #20 inClk = ~inClk; //Simulating FPGA's 50Mhs clock
+    forever #20 inClk = ~inClk; //Simulating FPGA's 50MHz clock
     end
 initial
 begin   
     reset = 1'b0;
-    #40 
+    #2 
     reset = 1'b1;
-    #30 $finish;
+    #1000 $finish;
 end
-initial $monitor($time, " inClk = %b, reset = %b, outCLk = %b", inClk, reset, outClk);
+initial $monitor($time, " inClk = %b, reset = %b, outClk = %b", inClk, reset, outClk);
 endmodule
 
 
