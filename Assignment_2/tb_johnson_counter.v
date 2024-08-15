@@ -14,7 +14,7 @@ begin
 end
 initial
 begin
-    $dumpfile("c.vcd");
+    $dumpfile("test_johnson_counter.vcd");
     $dumpvars(0, tb_three_bit_johnson_counter);
     rst = 1'b0;
     #5

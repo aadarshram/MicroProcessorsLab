@@ -3,16 +3,18 @@
 module tb_clk_divider();
 reg inClk, reset;
 wire outClk;
-clk_divider cd(out_clk, inClk, reset);
+clk_divider cd(outClk, inClk, reset);
 initial
     begin
     inClk = 1'b0;
     forever #20 inClk = ~inClk; //Simulating FPGA's 50MHz clock
     end
 initial
-begin   
+begin 
+    reset = 1'b1;  
+    #5
     reset = 1'b0;
-    #2 
+    #5
     reset = 1'b1;
     #1000 $finish;
 end

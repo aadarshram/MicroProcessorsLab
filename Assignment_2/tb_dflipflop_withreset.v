@@ -11,6 +11,8 @@ begin
 end
 initial
 begin
+    $dumpfile("test_dflipflop.vcd");
+    $dumpvars(0, tb_dflipflop_withreset);
     rst = 1'b0;
     #15
     rst = 1'b1;
