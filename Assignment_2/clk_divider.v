@@ -1,5 +1,5 @@
 // This code demonstrates a clock divider module to reduce clock frequency to observe results in an FPGA board
-module clk_divider(inClk, reset, outClk);
+module clk_divider(outClk, inClk, reset);
 input inClk;
 input reset;
 output outClk;

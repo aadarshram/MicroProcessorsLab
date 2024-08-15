@@ -3,7 +3,7 @@
 module tb_clk_divider();
 reg inClk, reset;
 wire outClk;
-clk_divider cd(inClk, reset, outClk);
+clk_divider cd(out_clk, inClk, reset);
 initial
     begin
     inClk = 1'b0;

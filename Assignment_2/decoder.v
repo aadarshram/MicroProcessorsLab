@@ -1,5 +1,5 @@
 // This code demonstrates the decoder module to display 3-bit Johnson counter results on the Seven-Segment display
-module decoder(cntr, Seven_Seg);
+module decoder(Seven_Seg, cntr);
 input [2:0] cntr;
 output [7:0] Seven_Seg;
 reg [6:0] val;
