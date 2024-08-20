@@ -1,10 +1,10 @@
 // This code demonstrates a trhee-bit Johnson Counter circuit model
-module three_bit_johnson_counter(Seven_Seg, digit, cntr, out_clk, in_clk, rst);
+module three_bit_johnson_counter(Seven_Seg, digit, in_clk, rst);
 input in_clk, rst;
-output out_clk;
+wire out_clk;
 output [7:0] Seven_Seg;
 output [3:0] digit;
-output [2:0] cntr;
+wire [2:0] cntr;
 
 wire q0, q1, q2;
 wire q2bar, q1bar, q0bar;
