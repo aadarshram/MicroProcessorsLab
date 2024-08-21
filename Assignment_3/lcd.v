@@ -15,11 +15,11 @@ assign command [2] = 8'h06; // Increment cursor, no shift
 assign command [3] = 8'h01; // Clear display
 assign command [4] = 8'hC0; // Choose second line
 
-clk_divider cd(in_Clk, out_Clk);
+clk_divider cd(out_Clk, in_Clk);
 assign lcd_e = out_Clk;
 
 always@(posedge lcd_e) begin
-    count  = count + 1;
+  count  = count + 1;
   case(count)
   1: begin lcd_rs = 0; data = command[0]; end
   2: begin lcd_rs = 0; data = command[1]; end
@@ -51,33 +51,23 @@ endmodule
 
 // Code for clock divider module used (taken from Assignment 2)
 // This code demonstrates a clock divider module to reduce clock frequency to observe results in an FPGA board
-module clk_divider(outClk, inClk, reset);
+module clk_divider(outClk, inClk);
 input inClk;
-input reset;
 output reg outClk;
 //reg clockCount;
 reg [25:0] clockCount;
 
-always@(negedge reset or posedge inClk)
+always@(posedge inClk)
 begin
-    if (reset == 1'b0)
-        begin
-            outClk = 1'b0;
-            //clockCount = 1'd0;
-            clockCount = 26'd0;
-        end
-    else
-        begin
-        // if (clockCount >= 1'd1)
-        if (clockCount >= 26'd50000000)
-            begin
-                // clockCount = 1'd0;
-                clockCount = 26'd0;
-                outClk = ~ outClk;
-            end
-        clockCount <= clockCount + 1;
+// if (clockCount >= 1'd1)
+if (clockCount >= 26'd50000000)
+    begin
+        // clockCount = 1'd0;
+        clockCount = 26'd0;
+        outClk = ~ outClk;
+    end
+clockCount <= clockCount + 1;
 
-        end
 end
 endmodule
 

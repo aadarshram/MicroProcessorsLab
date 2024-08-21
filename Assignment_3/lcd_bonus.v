@@ -21,7 +21,6 @@ clk_divider cd(in_Clk, out_Clk);
 assign lcd_e = out_Clk;
 
 unsigned_mult um(m, a, b);
-assign product = m;
 
 always@(posedge lcd_e) begin
     count  = count + 1;
