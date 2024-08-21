@@ -5,7 +5,6 @@ input [3:0] a, b;
 output reg [7:0] data;
 output reg lcd_rs;
 output lcd_e;
-output [7:0] product;
 
 wire [7:0] command [0:4];
 reg [31:0] count = 0;
