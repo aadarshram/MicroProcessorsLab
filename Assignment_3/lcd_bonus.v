@@ -1,13 +1,16 @@
 // This code is to display a set of characters in lcd display
-module lcd(in_Clk, lcd_rs, lcd_e, data);
+module lcd(in_Clk, a, b, lcd_rs, lcd_e, data);
 input in_Clk;
+input [3:0] a, b;
 output reg [7:0] data;
 output reg lcd_rs;
 output lcd_e;
+output [7:0] product;
 
 wire [7:0] command [0:4];
 reg [31:0] count = 0;
-wire out_Clk;
+wire out_Clk; 
+wire [7:0] m;
 
 assign command [0] = 8'h38; // Control signal to display on the two lines
 assign command [1] = 8'h0C; // Keep display on, cursor and blink off
@@ -18,30 +21,41 @@ assign command [4] = 8'hC0; // Choose second line
 clk_divider cd(in_Clk, out_Clk);
 assign lcd_e = out_Clk;
 
+unsigned_mult um(m, a, b);
+assign product = m;
+
 always@(posedge lcd_e) begin
     count  = count + 1;
   case(count)
+  // Entry command
   1: begin lcd_rs = 0; data = command[0]; end
   2: begin lcd_rs = 0; data = command[1]; end
   3: begin lcd_rs = 0; data = command[2]; end
   4: begin lcd_rs = 0; data = command[3]; end
-  5: begin lcd_rs = 0; data = command[4]; end
-  6: begin lcd_rs = 1; data = 8'h31; end
-  7: begin lcd_rs = 1; data = 8'h32; end
-  8: begin lcd_rs = 1; data = 8'h33; end
-  9: begin lcd_rs = 1; data = 8'h34; end
-  10: begin lcd_rs = 1; data = 8'h35; end
-  11: begin lcd_rs = 1; data = 8'h36; end
-  12: begin lcd_rs = 1; data = 8'h37; end
-  13: begin lcd_rs = 1; data = 8'h38; end
-  14: begin lcd_rs = 1; data = 8'h39; end
-  15: begin lcd_rs = 1; data = 8'h41; end
-  16: begin lcd_rs = 1; data = 8'h42; end
-  17: begin lcd_rs = 1; data = 8'h43; end
-  18: begin lcd_rs = 1; data = 8'h44; end
-  19: begin lcd_rs = 1; data = 8'h45; end
-  20: begin lcd_rs = 1; data = 8'h46; end
-  21: begin lcd_rs = 1; data = 8'h47; end
+  // Display "Product is ="
+  5: begin lcd_rs = 1; data = 8'h50; end // P
+  6: begin lcd_rs = 1; data = 8'h72; end // r
+  7: begin lcd_rs = 1; data = 8'h33; end // o
+  8: begin lcd_rs = 1; data = 8'h34; end // d
+  9: begin lcd_rs = 1; data = 8'h35; end // u
+  10: begin lcd_rs = 1; data = 8'h36; end // c
+  11: begin lcd_rs = 1; data = 8'h74; end // t
+  12: begin lcd_rs = 1; data = 8'h20; end // space
+  13: begin lcd_rs = 1; data = 8'h69; end // i
+  14: begin lcd_rs = 1; data = 8'h73; end // s
+  15: begin lcd_rs = 1; data = 8'h20; end // space
+  16: begin lcd_rs = 1; data = 8'h3D; end // equal to
+
+  17: begin lcd_rs = 1; data = command[4]; end // command for next line
+  // Display the product
+  18: begin lcd_rs = 1; data = m[7]; end
+  19: begin lcd_rs = 1; data = m[6]; end
+  20: begin lcd_rs = 1; data = m[5]; end
+  21: begin lcd_rs = 1; data = m[4]; end
+  22: begin lcd_rs = 1; data = m[3]; end
+  23: begin lcd_rs = 1; data = m[2]; end
+  24: begin lcd_rs = 1; data = m[1]; end
+  25: begin lcd_rs = 1; data = m[0]; end
 
   default: begin lcd_rs = 0; data = 8'h80; end
 
