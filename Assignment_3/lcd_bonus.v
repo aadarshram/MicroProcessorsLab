@@ -15,7 +15,7 @@ assign command [0] = 8'h38; // Control signal to display on the two lines
 assign command [1] = 8'h0C; // Keep display on, cursor and blink off
 assign command [2] = 8'h06; // Increment cursor, no shift
 assign command [3] = 8'h01; // Clear display
-assign command [4] = 8'h80 // choose first line
+assign command [4] = 8'h80; // choose first line
 assign command [5] = 8'hC0; // Choose second line
 
 clk_divider cd(out_Clk, in_Clk);
@@ -98,24 +98,25 @@ module b2h(b, h);
 input [3:0] b;
 output [3:0] h;
 case(b)
-1'd0: h = 4'h30;
-1'd1: h = 4'h31;
-1'd2: h = 4'h32;
-1'd3: h = 4'h33;
-1'd4: h = 4'h34;
-1'd5: h = 4'h35;
-1'd6: h = 4'h36;
-1'd7: h = 4'h37;
-1'd8: h = 4'h38;
-1'd9: h = 4'h39;
-1'd10: h = 4'h41;
-1'd11: h = 4'h42;
-1'd12: h = 4'h43;
-1'd13: h = 4'h44;
-1'd14: h = 4'h45;
-1'd15: h = 4'h46;
+1'd0: begin h = 4'h30 end;
+1'd1: begin h = 4'h31 end;
+1'd2: begin h = 4'h32 end;
+1'd3: begin h = 4'h33 end;
+1'd4: begin h = 4'h34 end;
+1'd5: begin h = 4'h35 end;
+1'd6: begin h = 4'h36 end;
+1'd7: begin h = 4'h37 end;
+1'd8: begin h = 4'h38 end;
+1'd9: begin h = 4'h39 end;
+1'd10: begin h = 4'h41 end;
+1'd11: begin h = 4'h42 end;
+1'd12: begin h = 4'h43 end;
+1'd13: begin h = 4'h44 end;
+1'd14: begin h = 4'h45 end;
+1'd15: begin h = 4'h46 end;
 
 endcase
+endmodule
 
 
 
