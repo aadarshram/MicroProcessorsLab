@@ -61,14 +61,10 @@ always@(posedge lcd_e) begin
   26: begin lcd_rs = 1; data = h[0]; end
 
   default: begin lcd_rs = 0; data = 8'h80; end
-
-  endcase
-  unsigned_mult um1(m1, a, b);
-  if (m != m1) begin
+endcase
+end
+always@(h) begin
     count = 0;
-    b2h b1(m[7:4], h[7:4]);
-    b2h b2(m[3:0], h[3:0]);
-  end
 end
 endmodule
 
@@ -98,23 +94,24 @@ module b2h(b, h);
 input [3:0] b;
 output [3:0] h;
 case(b)
-1'd0: begin h = 4'h30 end;
-1'd1: begin h = 4'h31 end;
-1'd2: begin h = 4'h32 end;
-1'd3: begin h = 4'h33 end;
-1'd4: begin h = 4'h34 end;
-1'd5: begin h = 4'h35 end;
-1'd6: begin h = 4'h36 end;
-1'd7: begin h = 4'h37 end;
-1'd8: begin h = 4'h38 end;
-1'd9: begin h = 4'h39 end;
-1'd10: begin h = 4'h41 end;
-1'd11: begin h = 4'h42 end;
-1'd12: begin h = 4'h43 end;
-1'd13: begin h = 4'h44 end;
-1'd14: begin h = 4'h45 end;
-1'd15: begin h = 4'h46 end;
+4'd0: begin h = 4'h30; end
+4'd1: begin h = 4'h31; end
+4'd2: begin h = 4'h32; end
+4'd3: begin h = 4'h33; end
+4'd4: begin h = 4'h34; end
+4'd5: begin h = 4'h35; end
+4'd6: begin h = 4'h36; end
+4'd7: begin h = 4'h37; end
+4'd8: begin h = 4'h38; end
+4'd9: begin h = 4'h39; end
+4'd10: begin h = 4'h41; end
+4'd11: begin h = 4'h42; end
+4'd12: begin h = 4'h43; end
+4'd13: begin h = 4'h44; end
+4'd14: begin h = 4'h45; end
+4'd15: begin h = 4'h46; end
 
+default: h = 4'h00; // default
 endcase
 endmodule
 
