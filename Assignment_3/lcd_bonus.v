@@ -6,11 +6,12 @@ output reg [7:0] data;
 output reg lcd_rs;
 output lcd_e;
 
+reg [3:0] a_old = 4'b0000, b_old = 4'b0000;
 wire [7:0] command [0:5];
 reg [31:0] count = 0;
 wire out_Clk; 
 wire [7:0] m, m1;
-wire [7:0] h;
+wire [11:0] bcd;
 assign command [0] = 8'h38; // Control signal to display on the two lines
 assign command [1] = 8'h0C; // Keep display on, cursor and blink off
 assign command [2] = 8'h06; // Increment cursor, no shift
@@ -22,12 +23,16 @@ clk_divider cd(out_Clk, in_Clk);
 assign lcd_e = out_Clk;
 
 unsigned_mult um(m, a, b);
-// convert m to hexadecimal
-b2h b1(m[7:4], h[7:4]);
-b2h b2(m[3:0], h[3:0]);
+// convert m to bcd
+bin2bcd b1(bcd, m);
 
 always@(posedge lcd_e) begin
-  count  = count + 1;
+  if (a != a_old || b != b_old) begin
+    count <= 0;
+    a_old <= a;
+    b_old <= b;
+  end
+  count  <= count + 1;
   case(count)
   // Entry command
   1: begin lcd_rs = 0; data = command[0]; end
@@ -50,21 +55,19 @@ always@(posedge lcd_e) begin
   17: begin lcd_rs = 1; data = 8'h3D; end // equal to
 
   18: begin lcd_rs = 0; data = command[5]; end // command for next line
+
   // Display the product
-  19: begin lcd_rs = 1; data = h[7]; end
-  20: begin lcd_rs = 1; data = h[6]; end
-  21: begin lcd_rs = 1; data = h[5]; end
-  22: begin lcd_rs = 1; data = h[4]; end
-  23: begin lcd_rs = 1; data = h[3]; end
-  24: begin lcd_rs = 1; data = h[2]; end
-  25: begin lcd_rs = 1; data = h[1]; end
-  26: begin lcd_rs = 1; data = h[0]; end
+  19: begin lcd_rs = 1; data = bcd[11:8] + 8'h30; end
+  20: begin lcd_rs = 1; data = bcd[7:4] + 8'h30; end
+  21: begin lcd_rs = 1; data = bcd[3:0] + 8'h30; end
 
   default: begin lcd_rs = 0; data = 8'h80; end
-endcase
+  endcase
 end
-always@(h) begin
-    count = 0;
+always@(posedge lcd_e) begin
+  lcd_rs = 0; data = command[3];
+  lcd_rs = 0; data = command[4];
+
 end
 endmodule
 
@@ -90,30 +93,21 @@ clockCount <= clockCount + 1;
 end
 endmodule
 
-module b2h(b, h);
-input [3:0] b;
-output [3:0] h;
-case(b)
-4'd0: begin h = 4'h30; end
-4'd1: begin h = 4'h31; end
-4'd2: begin h = 4'h32; end
-4'd3: begin h = 4'h33; end
-4'd4: begin h = 4'h34; end
-4'd5: begin h = 4'h35; end
-4'd6: begin h = 4'h36; end
-4'd7: begin h = 4'h37; end
-4'd8: begin h = 4'h38; end
-4'd9: begin h = 4'h39; end
-4'd10: begin h = 4'h41; end
-4'd11: begin h = 4'h42; end
-4'd12: begin h = 4'h43; end
-4'd13: begin h = 4'h44; end
-4'd14: begin h = 4'h45; end
-4'd15: begin h = 4'h46; end
-
-default: h = 4'h00; // default
-endcase
+// We need to convert binary to bcd for display in lcd
+module bin2bcd( // double-dabble algorithm - behavioural model
+   input [7:0] bin,
+   output reg [11:0] bcd
+   );
+integer i;
+always @(bin) begin
+    bcd=0;		 	
+    for (i=0;i<8;i=i+1) begin					//Iterate once for each bit in input number
+        if (bcd[3:0] >= 5) bcd[3:0] = bcd[3:0] + 3;		//If any BCD digit is >= 5, add three
+	    if (bcd[7:4] >= 5) bcd[7:4] = bcd[7:4] + 3;
+	    if (bcd[11:8] >= 5) bcd[11:8] = bcd[11:8] + 3;
+	    bcd = {bcd[10:0],bin[7-i]};				//Shift one bit, and shift in the MSB from input 
+    end
+end
 endmodule
-
 
 
