@@ -10,7 +10,7 @@ reg [3:0] a_old = 4'b0000, b_old = 4'b0000;
 wire [7:0] command [0:5];
 reg [31:0] count = 0;
 wire out_Clk; 
-wire [7:0] m, m1;
+wire [7:0] m;
 wire [11:0] bcd;
 assign command [0] = 8'h38; // Control signal to display on the two lines
 assign command [1] = 8'h0C; // Keep display on, cursor and blink off
@@ -92,8 +92,8 @@ endmodule
 
 // We need to convert binary to bcd for display in lcd
 module bin2bcd( // double-dabble algorithm - behavioural model
-   input [7:0] bin,
-   output reg [11:0] bcd
+   output reg [11:0] bcd,
+   input [7:0] bin
    );
 integer i;
 always @(bin) begin
