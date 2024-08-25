@@ -32,7 +32,9 @@ always@(posedge lcd_e) begin
     a_old <= a;
     b_old <= b;
   end
-  count  <= count + 1;
+  if (count < 21) begin
+    count  <= count + 1;
+    end 
   case(count)
   // Entry command
   1: begin lcd_rs = 0; data = command[0]; end
@@ -63,11 +65,6 @@ always@(posedge lcd_e) begin
 
   default: begin lcd_rs = 0; data = 8'h80; end
   endcase
-end
-always@(posedge lcd_e) begin
-  lcd_rs = 0; data = command[3];
-  lcd_rs = 0; data = command[4];
-
 end
 endmodule
 
