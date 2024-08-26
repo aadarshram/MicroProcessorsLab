@@ -35,42 +35,23 @@ initial begin
 
     $dumpfile("test_lcd_bonus.vcd");
     $dumpvars(1, lcd_tb);
-    // Initialize inputs
-    a = 4'b0000;
-    b = 4'b0000;
 
-    // Wait for a few clock cycles
-    #100;
-
-    // Test case 1: a = 3, b = 5
     a = 4'b0011;
     b = 4'b0101;
 
-    // Wait for result to stabilize
-    #100;
-
-    // Test case 2: a = 9, b = 2
+    #800;
     a = 4'b1001;
     b = 4'b0010;
 
-    // Wait for result to stabilize
-    #200;
-
-    // Test case 3: a = 7, b = 7
+    #800;
     a = 4'b0111;
     b = 4'b0111;
 
-    // Wait for result to stabilize
-    #200;
-
-    // Test case 4: a = 15, b = 15
+    #800;
     a = 4'b1111;
     b = 4'b1111;
 
-    // Wait for result to stabilize
-    #200;
-
-    // End simulation
+    #800;
     $finish;
 end
 

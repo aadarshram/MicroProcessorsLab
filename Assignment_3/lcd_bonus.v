@@ -74,7 +74,7 @@ module clk_divider(outClk, inClk);
 input inClk;
 output reg outClk = 0;
 //reg clockCount;
-reg [25:0] clockCount;
+reg [25:0] clockCount = 0;
 
 always@(posedge inClk)
 begin
