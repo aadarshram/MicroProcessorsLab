@@ -32,7 +32,7 @@ always@(posedge lcd_e) begin
     a_old <= a;
     b_old <= b;
   end
-  if (count < 21) begin
+  if (count <= 21) begin
     count  <= count + 1;
     end 
   case(count)
