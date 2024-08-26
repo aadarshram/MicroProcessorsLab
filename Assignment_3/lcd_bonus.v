@@ -1,4 +1,4 @@
-// This code is to display a set of characters in lcd display
+// This code is to display the product of a multiplier in an lcd display
 module lcd(in_Clk, a, b, lcd_rs, lcd_e, data);
 input in_Clk;
 input [3:0] a, b;
@@ -46,7 +46,7 @@ always@(posedge lcd_e) begin
   6: begin lcd_rs = 1; data = 8'h50; end // P
   7: begin lcd_rs = 1; data = 8'h72; end // r
   8: begin lcd_rs = 1; data = 8'h6F; end // o
-  9: begin lcd_rs = 1; data = 8'h34; end // d
+  9: begin lcd_rs = 1; data = 8'h64; end // d
   10: begin lcd_rs = 1; data = 8'h75; end // u
   11: begin lcd_rs = 1; data = 8'h63; end // c
   12: begin lcd_rs = 1; data = 8'h74; end // t
@@ -72,7 +72,7 @@ endmodule
 // This code demonstrates a clock divider module to reduce clock frequency to observe results in an FPGA board
 module clk_divider(outClk, inClk);
 input inClk;
-output reg outClk;
+output reg outClk = 0;
 //reg clockCount;
 reg [25:0] clockCount;
 

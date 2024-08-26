@@ -32,6 +32,9 @@ end
 
 // Apply test vectors
 initial begin
+
+    $dumpfile("test_lcd_bonus.vcd");
+    $dumpvars(1, lcd_tb);
     // Initialize inputs
     a = 4'b0000;
     b = 4'b0000;
