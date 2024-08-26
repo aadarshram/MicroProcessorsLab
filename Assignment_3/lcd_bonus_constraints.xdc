@@ -20,4 +20,4 @@ set_property -dict { PACKAGE_PIN N1 IOSTANDARD LVCMOS33 } [get_ports { b[3] }];
 # Command pins
 set_property -dict { PACKAGE_PIN T3 IOSTANDARD LVCMOS33 } [get_ports {lcd_e}];
 set_property -dict { PACKAGE_PIN P5 IOSTANDARD LVCMOS33 } [get_ports {lcd_rs}];
-set_property -dict { PACKAGE_PIN N11 IOSTANDARD LVCMOS33 } [get_ports { in_Clk }];s
+set_property -dict { PACKAGE_PIN N11 IOSTANDARD LVCMOS33 } [get_ports { in_Clk }];
