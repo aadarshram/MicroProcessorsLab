@@ -16,4 +16,4 @@ This repository contains the Verilog code and testbenches for simulation and imp
 - **Testbenches**: Verilog testbenches used for simulating the functionality of the modules
 
 ### Report
-The report submitted for Assignment 3 can be downloaded [here](https://github.com/aadarshram/MicroProcessorsLab_EE2016/blob/main/Assignment_2/Assgn3_Report.pdf).
+The report submitted for Assignment 3 can be downloaded [here](https://github.com/aadarshram/MicroProcessorsLab_EE2016/blob/main/Assignment_3/Assgn3_Report.pdf).
