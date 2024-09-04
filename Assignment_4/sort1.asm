@@ -15,12 +15,14 @@ ldi r31, high(numbers)
 ldi r20, 0 ; Counter for loading numbers into SRAM / and for outer loop in bubble sort
 ldi r22, 0 ; Inner loop counter for the bubble sort algorithm
 
+; Initialize Y pointer
+ldi r28, low(stored_numbers)
+ldi r29, high(stored_numbers)
+
 LOAD_NUMBERS:
     lpm r21, Z+ ; Load a number
     
-    add r30, r20
-    st sorted_numbers, r21 ; Store number at location using (store indirect - using pointers)
-    sub r30, r20
+    st Y+, r21 ; Store number at location using (store indirect - using pointers)
 
     inc r20 
     cpi r20, 5
@@ -30,13 +32,15 @@ LOAD_NUMBERS:
 ; Bubble sort
 OUTER_LOOP:
     ldi r22, 0 ; Reset inner loop index to 0
+    ; Reset Y pointer
+    ldi r28, low(stored_numbers)
+    ldi r29, high(stored_numbers)
+
 
 INNER_LOOP:
 
-    add r30, r22 
-    ldi r24, sorted_numbers ; Load number at index r22
-    ldi r25, sorted_numbers + 1 ; Load next immediate number
-    sub r30, r22
+    ldi r24, Y+ ; Load number at index r22
+    ldi r25, Y ; Load next immediate number
 
     cp r24, r25 ; Compare 
     brlo NO_SWAP ; If number less than next immediate- no swap
@@ -48,10 +52,13 @@ INNER_LOOP:
     mov r25, r26
 
     ; Store
-    add r30, r22
-    st sorted_numbers, r24
-    st sorted_numbers + 1, r25
-    sub r30, r22
+    st Y-, r25
+    st Y+, r24
+    
+    inc r22
+    cpi r22, 4 ; Stop if > 4
+    brne INNER_LOOP ; Repeat until r22 = 4
+
 
 NO_SWAP:
     inc r22
