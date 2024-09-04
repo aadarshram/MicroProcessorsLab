@@ -39,7 +39,8 @@ OUTER_LOOP:
 
 INNER_LOOP:
 
-    ldi r24, Y+ ; Load number at index r22
+    ld r24, Y ; Load number at index r22
+    inc r28
     ldi r25, Y ; Load next immediate number
 
     cp r24, r25 ; Compare 
@@ -52,8 +53,10 @@ INNER_LOOP:
     mov r25, r26
 
     ; Store
-    st Y-, r25
-    st Y+, r24
+    st Y, r25
+    dec r28
+    st Y, r24
+    inc r28
 
     inc r22
     cpi r22, 4 ; Stop if > 4
