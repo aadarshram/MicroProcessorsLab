@@ -41,7 +41,7 @@ INNER_LOOP:
 
     ld r24, Y ; Load number at index r22
     inc r28
-    ldi r25, Y ; Load next immediate number
+    ld r25, Y ; Load next immediate number
 
     cp r24, r25 ; Compare 
     brlo NO_SWAP ; If number less than next immediate- no swap
