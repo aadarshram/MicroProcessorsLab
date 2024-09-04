@@ -18,7 +18,11 @@ ldi r22, 0 ; Inner loop counter for the bubble sort algorithm
 
 LOAD_NUMBERS:
     lpm r21, Z+ ; Load a number
-    st sorted_numbers + r20, r21 ; Store number at location using (store indirect - using pointers)
+    
+    add r30, r20
+    st sorted_numbers, r21 ; Store number at location using (store indirect - using pointers)
+    sub r30, r20
+
     inc r20 
     cpi r20, 5
     brne LOAD_NUMBERS ; Keep loading until 5 numbers are fetched
@@ -29,8 +33,11 @@ OUTER_LOOP:
     ldi r22, 0 ; Reset inner loop index to 0
 
 INNER_LOOP:
-    ldi r24, sorted_numbers + r22 ; Load number at index r22
-    ldi r25, sorted_numbers + r22 + 1 ; Load next immediate number
+    add
+    add r30, r22 
+    ldi r24, sorted_numbers ; Load number at index r22
+    ldi r25, sorted_numbers + 1 ; Load next immediate number
+    sub r30, r22
 
     cp r24, r25 ; Compare 
     brlo NO_SWAP ; If number less than next immediate- no swap
@@ -40,10 +47,13 @@ INNER_LOOP:
     mov r26, r24 
     mov r24, r25
     mov r25, r26
-    ; Store
-    st sorted_numbers + r22, r24
-    st sorted_numbers + r22 + 1, r25
 
+    ; Store
+    add r30, r22
+    st sorted_numbers, r24
+    st sorted_numbers + 1, r25
+    sub r30, r22
+    
 NO_SWAP:
     inc r22
     cpi r22, 4 ; Stop if > 4
