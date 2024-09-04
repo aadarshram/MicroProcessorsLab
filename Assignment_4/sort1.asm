@@ -26,7 +26,7 @@ LOAD_NUMBERS:
 
     inc r20 
     cpi r20, 5
-    brne LOAD_NUMBERS ; Keep loading until 5 numbers are fetched
+    brlo LOAD_NUMBERS ; Keep loading until 5 numbers are fetched
     ldi r20, 0 ; Reset register with value 0
 
 ; Bubble sort
@@ -60,20 +60,20 @@ INNER_LOOP:
 
     inc r22
     cpi r22, 4 ; Stop if > 4
-    brne INNER_LOOP ; Repeat until r22 = 4
+    brlo INNER_LOOP ; Repeat until r22 = 4
     rjmp INC_OUTER
 
 
 NO_SWAP:
     inc r22
     cpi r22, 4 ; Stop if > 4
-    brne INNER_LOOP ; Repeat until r22 = 4
+    brlo INNER_LOOP ; Repeat until r22 = 4
     rjmp INC_OUTER
 
 INC_OUTER:
     inc r21 ; Increment outer loop
     cpi r21, 4 ; Stop if > 4
-    brne OUTER_LOOP ; Repeat until r21 = 4, ie, until all numbers are sorted
+    brlo OUTER_LOOP ; Repeat until r21 = 4, ie, until all numbers are sorted
 
 nop ; No operation
 
