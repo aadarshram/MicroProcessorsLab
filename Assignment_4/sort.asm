@@ -4,9 +4,8 @@
 .cseg
 
 .org 0x00
-numbers: .db 1, 3, 4, 2, 5
-
-sorted_numbers: .db 0, 0, 0, 0, 0 ; Initialize space for output storage in SRAM
+numbers:
+	.db 1, 2, 4, 3, 5
 
 ; Initialize Z pointer
 ldi r30, low(numbers)
@@ -15,28 +14,33 @@ ldi r31, high(numbers)
 ldi r20, 0 ; Counter for loading numbers into SRAM / and for outer loop in bubble sort
 ldi r22, 0 ; Inner loop counter for the bubble sort algorithm
 
+; Initialize Y pointer
+ldi r28, 0x00
+ldi r29, 0x01 ; SRAM data address starts from 0x0100
+
 LOAD_NUMBERS:
     lpm r21, Z+ ; Load a number
     
-    add r30, r20
-    st sorted_numbers, r21 ; Store number at location using (store indirect - using pointers)
-    sub r30, r20
+    st Y+, r21 ; Store number at location using (store indirect - using pointers)
 
     inc r20 
     cpi r20, 5
-    brne LOAD_NUMBERS ; Keep loading until 5 numbers are fetched
+    brlo LOAD_NUMBERS ; Keep loading until 5 numbers are fetched
     ldi r20, 0 ; Reset register with value 0
 
 ; Bubble sort
 OUTER_LOOP:
     ldi r22, 0 ; Reset inner loop index to 0
+    ; Reset Y pointer
+    ldi r28, 0x00
+    ldi r29, 0x01
+
 
 INNER_LOOP:
 
-    add r30, r22 
-    ldi r24, sorted_numbers ; Load number at index r22
-    ldi r25, sorted_numbers + 1 ; Load next immediate number
-    sub r30, r22
+    ld r24, Y ; Load number at index r22
+    inc r28
+    ld r25, Y ; Load next immediate number
 
     cp r24, r25 ; Compare 
     brlo NO_SWAP ; If number less than next immediate- no swap
@@ -48,19 +52,27 @@ INNER_LOOP:
     mov r25, r26
 
     ; Store
-    add r30, r22
-    st sorted_numbers, r24
-    st sorted_numbers + 1, r25
-    sub r30, r22
+    st Y, r25
+    dec r28
+    st Y, r24
+    inc r28
+
+    inc r22
+    cpi r22, 4 ; Stop if > 4
+    brlo INNER_LOOP ; Repeat until r22 = 4
+    rjmp INC_OUTER
+
 
 NO_SWAP:
     inc r22
     cpi r22, 4 ; Stop if > 4
-    brne INNER_LOOP ; Repeat until r22 = 4
+    brlo INNER_LOOP ; Repeat until r22 = 4
+    rjmp INC_OUTER
 
+INC_OUTER:
     inc r21 ; Increment outer loop
     cpi r21, 4 ; Stop if > 4
-    brne OUTER_LOOP ; Repeat until r21 = 4, ie, until all numbers are sorted
+    brlo OUTER_LOOP ; Repeat until r21 = 4, ie, until all numbers are sorted
 
 nop ; No operation
 
