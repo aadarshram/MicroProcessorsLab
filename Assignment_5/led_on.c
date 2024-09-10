@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	DDRC = 0x01; // Direction
-	PORTC = 0x01; // State
+	DDRD = 0x01; // Direction
+	PORTD = 0x01; // State
 }
