@@ -16,7 +16,7 @@ ldi r22, 0 ; Inner loop counter for the bubble sort algorithm
 
 ; Initialize Y pointer
 ldi r28, 0x00
-ldi r29, 0x01 ; SRAM data address starts from 0x0100
+ldi r29, 0x01 ; SRAM data address starts from 0x0060. Any address in use should be >
 
 LOAD_NUMBERS:
     lpm r21, Z+ ; Load a number
