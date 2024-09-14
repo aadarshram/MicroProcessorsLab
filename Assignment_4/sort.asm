@@ -65,7 +65,7 @@ INNER_LOOP:
 
 NO_SWAP:
     inc r22
-    cpi r22, 4 ; Stop if > 4
+    cpi r22, 5 ; Stop if > 4 (to always set carry flag 4->5 since =4 changes zero flag)
     brlo INNER_LOOP ; Repeat until r22 = 4
     rjmp INC_OUTER
 
