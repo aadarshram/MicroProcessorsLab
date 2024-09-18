@@ -19,4 +19,4 @@ LOOP:
 
 ; r16 holds the sum of the 10 numbers
 
-nop ; No peration
+nop ; No operation
