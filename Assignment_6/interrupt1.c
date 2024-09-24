@@ -10,7 +10,9 @@ int main(void)
     DDRD = 0x00;  // One input on PORT D (switch)
     GICR = 0x40;  // Enable INT0 interrupt in the General Interrupt Control Register (INT0 is associated with 0x40)
     SREG = 0x80;  // Set the Global Interrupt enable in Status Register
-    PORTB = 0x01; // Keep White LED on
+    while(1){
+        PORTB = 0x01; // Keep White LED on
+    }
 }
 
 ISR(INT0_vect) // INT0_vect is identifier for interrupt INT0 in the Interrupt Service Routine
