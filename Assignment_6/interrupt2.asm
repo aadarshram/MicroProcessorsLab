@@ -1,55 +1,62 @@
-.org 0
-rjmp reset ; on reset, program starts here
+; Program to blink white LED on interrupt
+
+.org 0 
+rjmp reset ; start program
 .org 0x002 ; Interrupt vector address for INT1
 rjmp int1_ISR
 
 reset:
-    ldi R16, 0x70 ; setup the stack pointer to point to address 0x0070
-    out spl, ...
-    ldi  ..., 0
-    out sph, ...
-    ldi R16, ... ; Make PB1 output
-    out ..., ...
-    ldi R16, ... ; Make PORTD input
-    out ..., ...
+    ldi R16, 0x70 ; Setup the stack pointer to point to address 0x0070
+    out spl, R16 ; Set low
+    ldi  R16, 0x00
+    out sph, R16 ; Set high
+    ldi R16, 0x01 ; Set PB1 to output in DDR
+    out DDRB, R16
+    ldi R16, 0x00 ; Set PORTD to input in DDR
+    out DDRD, R16
     ldi R16, 0x08 ; Use pull-up resistor for PD3
-    out ..., ...
+    out PORTD, R16 ; Enable pin3  pull-up resistor
 
-    in R16, ...
-    ori R16, 0x80 ; Enable INT1 interrupt
-    out ..., R16
+    in R16, GICR
+    ori R16, 0x80 ; Enable INT1 interrupt in General Interrupt Control Register
+    out GICR, R16
 
-    ldi R16, ... ; Turn off LED
-    out ..., ...
+    ldi R16, 0x00 ; Turn off LED
+    out PORTB, R16
 
-    ... ; Enable interrupts
+    sei ; Enable interrupts in SREG
 
-indefiniteloop: ... indefiniteloop
+indefiniteloop: 
+    rjmp indefiniteloop ; Main program -  do nothing (unless interrupt)
+
 int1_ISR: ; INT1 interrupt handler or ISR
-    ... ; Clear interrupts
-    in R16, ... ; Save status register SREG
-    push ...
+    cli ; Clear interrupts
+    in R16, SREG ; Save status register SREG
+    push R16 ; Push SREG contents onto stack
 
-ldi R16, ... ; Blink LED 10 times
-mov R0, R16
+ldi R16, 10 
+mov R0, R16 ;  Counter for LED blinks - no. = 10
 
 back5:
-    ldi R16, 02 ; Turn on LED
-    out ..., ...
+    ldi R16, 0x02 ; Turn on LED
+    out PORTB, R16
 
 delay1:
-    ldi R16, 0xFF ; delay
+    ldi R16, 0xFF ; counter for delay
 back2:
-    ldi r17, 0xFF
+    ldi r17, 0xFF ;  counter for more delay
 back1: 
-    dec r7
+    dec r17
     brne back1
     dec r16
     brne back2
 
-ldi R16, ... ; Turn off LED
-out ..., ...
+; Above block - delay in nested loop
 
+ldi R16, 0x00 ; Turn off LED
+out PORTB, R16
+
+; Delay block - agin
 delay2: 
     ldi R16, 0xFF ; delay
 back3:
@@ -59,8 +66,8 @@ back4:
     brne back4
     dec R16
     brne back3
-    dec ...
-brne ... ; Check if LED has blinked 10 times
-pop ... ; Retrieve status register
-out ..., ...
-... ; Go back to main program
+    dec R0 ; Dec blink count
+brne back5 ; Check if LED has blinked 10 times
+pop R16 ; Retrieve status register from stack to R16
+out SREG, R16 ; Restore SREG
+rjmp indefiniteloop ; Go back to main program
