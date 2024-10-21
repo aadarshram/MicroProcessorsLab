@@ -1,9 +1,7 @@
-// This code demonstrates a clock divider module to reduce clock frequency to observe results in an FPGA board
+// This code demonstrates a clock divider module to reduce clock frequency to observe results on an FPGA board
 module clk_divider(outClk, inClk, reset);
-input inClk;
-input reset;
+input inClk, reset;
 output reg outClk;
-//reg clockCount;
 reg [25:0] clockCount;
 
 always@(negedge reset or posedge inClk)
@@ -20,8 +18,8 @@ begin
         if (clockCount >= 26'd50000000)
             begin
                 // clockCount = 1'd0;
-                clockCount = 26'd0;
-                outClk = ~ outClk;
+                clockCount <= 26'd0;
+                outClk <= ~ outClk;
             end
         clockCount <= clockCount + 1;
 
