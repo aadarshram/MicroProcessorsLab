@@ -24,7 +24,7 @@ begin
     i1 = 4'b0110;
     i2 = 4'b1000;
 
-    # 30 $finish;
+    #30 $finish;
 
 end
 initial $monitor($time, " i1 = %b, i2 = %b, cin = %b, cout = %b, o = %b ", i1, i2, cin, cout, o);
