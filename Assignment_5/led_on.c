@@ -2,9 +2,9 @@
 
 int main(void)
 {
+	DDRD = 0x01; // Direction
+	PORTD = 0x01; // State
 	while(1){
 		
-		DDRD = 0x01; // Direction
-		PORTD = 0x01; // State
 	}
 }
