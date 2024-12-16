@@ -1,9 +1,8 @@
 // This code demonstrates a behavioural model for the D-flip flop circuit with the option of resettt
 module dflipflop_withreset(q, qbar, d, rst, clk);
-output q, qbar;
+output reg q, qbar;
 input d, rst, clk;
-reg q, qbar;
-always@(posedge clk or negedge rst)
+    always@(posedge clk or negedge rst) // active low reset
     begin 
         if (~rst)
             begin
