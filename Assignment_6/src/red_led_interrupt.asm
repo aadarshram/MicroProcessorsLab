@@ -1,4 +1,4 @@
-; Program to blink white LED on interrupt
+; Program to blink red LED on interrupt
 
 .org 0 
 rjmp reset ; start program

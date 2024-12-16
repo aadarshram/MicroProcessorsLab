@@ -1,18 +1,33 @@
-## Assignment 1: Adder Circuits Simulation and Implementation
+# Assignment 1: Adder Circuits Simulation and Implementation
 
-This repository contains the Verilog code and testbenches for simulating and implementing various adder circuits as part of Assignment 1. The components include:
+This repository contains the Verilog implementation of various adder circuits, showcasing expertise in digital design and hardware simulation. The circuits implemented include:
 
-- **Half-Adder**
-- **Full-Adder**
-- **Four-Bit Ripple-Carry Adder**
+- **Half-Adder**: Adds two binary digits and outputs the **sum** and **carry**.
+- **Full-Adder**: Handles three input bits with outputs for **sum** and **carry**.
+- **Four-Bit Ripple-Carry Adder**: Performs addition of two 4-bit numbers with carry propagation.
 
-### Tools Used
-- **Xilinx Vivado**: For simulation and synthesis
-- **FPGA Board**: For hardware implementation
+---
 
-### Repository Structure
-- **Modules**: Verilog files for the half-adder, full-adder, and ripple-carry adder
-- **Testbenches**: Verilog testbenches used for simulating the functionality of each module
+## Highlights
 
-### Report
-The report submitted for Assignment 1 can be downloaded [here](https://github.com/aadarshram/MicroProcessorsLab_EE2016/blob/main/Assignment_1/Assgn1_Report.pdf).
+- **Modular Design**: Clean and modular Verilog code for each adder circuit.
+- **Simulation & Debugging**:
+  - Verified functionality using **Xilinx Vivado**.
+  - Waveforms visualized with **GTKWave** for debugging.
+- **Hardware Deployment**: Synthesized designs are tested on an **FPGA board** for real-world validation.
+
+---
+
+## Tools & Technologies
+
+- **Xilinx Vivado**: For simulation, synthesis, and hardware implementation.
+- **GTKWave**: For analyzing simulation waveforms.
+- **Iverilog**: For debugging source code.
+- **FPGA Board**: For implementing and testing the circuits.
+
+---
+
+## Documentation
+
+A detailed report explaining the design process, simulation results, and hardware testing is available:  
+[Assignment Report](https://github.com/aadarshram/MicroProcessorsLab_EE2016/blob/main/Assignment_1/Assgn1_Report.pdf).

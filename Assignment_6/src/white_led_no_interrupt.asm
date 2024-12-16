@@ -37,7 +37,7 @@ int1_ISR: ; INT1 interrupt handler or ISR
     push R16 ; Push SREG contents onto stack
 
 ldi R16, 0x00 
-out PORTB, R16 ; Explicitly turn of white LED on interrupt
+out PORTB, R16 ; Explicitly turn off white LED on interrupt
 ldi R16, 10 
 mov R0, R16 ;  Counter for LED blinks - no. = 10
 

@@ -1,11 +1,23 @@
 # Assignment 4: Programming an AVR ATmega8 Microcontroller using Assembly
 
-This repository contains the assembly code for 
-1. finding maximum and minimum of a given set of numbers.
-2. Adding a given set of numbers
-3. Sorting a given set of numbers in ascending order.
+This repository contains assembly code developed for the **AVR ATmega8 microcontroller** to perform the following tasks:
 
-We use **Microchip Studio** as our software for writing assembly and building the solution for the AVR ATmega8. The code files for each program can be found here.
+1. **Find the Maximum and Minimum** of a given set of numbers.
+2. **Add a Given Set of Numbers.**
+3. **Sort a Given Set of Numbers** in ascending order.
 
-### Report
-The report submitted for Assignment 4 can be downloaded [here](https://github.com/aadarshram/MicroProcessorsLab_EE2016/blob/main/Assignment_3/Assgn4_Report.pdf)
+## Tools Used
+
+- **Microchip Studio**: Used for writing, building, and debugging the assembly programs for the AVR ATmega8 microcontroller.
+
+## Repository Structure
+
+- **`src/`**: Contains the assembly code for each program:
+  - `max_min.asm` - Find maximum and minimum of a set of numbers.
+  - `add.asm` - Add a set of numbers.
+  - `sort.asm` - Sort a set of numbers in ascending order.
+- **`report`**: Includes the detailed assignment report in PDF format.
+
+## Report
+
+The complete report for Assignment 4, including the implementation details, testing, and results, can be downloaded [here](https://github.com/aadarshram/MicroProcessorsLab_EE2016/blob/main/Assignment_3/Assgn4_Report.pdf).

@@ -1,4 +1,5 @@
 # Design constraint file for the three-bit Johnson Counter
+
 # Clock signal
 set_property -dict { PACKAGE_PIN N11 IOSTANDARD LVCMOS33 } [get_ports { in_clk }];
 
